@@ -1,51 +1,63 @@
-﻿double a, b;
+﻿double Result, number1, number2, limit;
 bool stillMore;
+
+Console.WriteLine("Welcome to Calculator: Enter your option (1-4)");
+Console.WriteLine("1. Add");
+Console.WriteLine("2. Sub");
+Console.WriteLine("3. Multiply");
+Console.WriteLine("4. Divide");
 do
 {
-    Console.WriteLine("Welcome to Calculator: Enter your option (1-4)");
-    Console.WriteLine("1. Add");
-    Console.WriteLine("2. Sub");
-    Console.WriteLine("3. Multiply");
-    Console.WriteLine("4. Divide");
+
     Console.Write("Enter your option: ");
-    string answer = Console.ReadLine();
+    string received = Console.ReadLine();
+    while (!Double.TryParse(received, out limit) || limit > 4 || limit < 1)
+    {
+        Console.Write("Not valid, try again: ");
+        received = Console.ReadLine();
+    }
 
     Console.Write("Enter 1st No: ");
-    string received1 = Console.ReadLine();
+    received = Console.ReadLine();
 
-    while (!Double.TryParse(received1, out a))
+    while (!Double.TryParse(received, out number1))
     {
-        Console.WriteLine("Not valid, try again: ");
-        received1 = Console.ReadLine();
+        Console.Write("Not valid, try again 1st number: ");
+        received = Console.ReadLine();
     }
 
     Console.Write("Enter 2nd No: ");
-    string received2 = Console.ReadLine();
-    while (!Double.TryParse(received2, out b))
+    received = Console.ReadLine();
+    while (!Double.TryParse(received, out number2))
     {
-        Console.WriteLine("Not valid, try again: ");
-        received2 = Console.ReadLine();
+        Console.Write("Not valid, try again 2nd number: ");
+        received = Console.ReadLine();
     }
-    double c = 0;
-
-    switch (answer)
+    
+    switch (limit)
     {
-        case "1":
-            c = a + b;
-            Console.WriteLine($"add : {c}");
+        case 1:
+            Result = number1 + number2;
+            Console.WriteLine("Add : " + Result);
             break;
-        case "2":
-            c = a - b;
-            Console.WriteLine($"sub : {c}");
+        case 2:
+            Result = number1 - number2;
+            Console.WriteLine("Sub : " + Result);
             break;
-        case "3":
-            c = a * b;
-            Console.WriteLine($"multiply : {c}");
+        case 3:
+            Result = number1 * number2;
+            Console.WriteLine("Multiply : " + Result);
             break;
-        case "4":
-            c = a / b;
-            Console.WriteLine($"divide : {c}");
+        case 4:
+            Result = number1 / number2;
+            if (number2 == 0)
+                Console.WriteLine("You can not denominate with 0");
+            else
+                Console.WriteLine("divide : " + Result);
             break;
+        default:
+            Console.WriteLine("Not valid, try again");
+        break;
     }
     Console.Write("More number to calculate? (Y/N): ");
     string choice = Console.ReadLine().ToUpper();
